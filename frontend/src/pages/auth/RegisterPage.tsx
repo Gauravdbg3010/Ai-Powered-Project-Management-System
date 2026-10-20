@@ -33,8 +33,18 @@ export function RegisterPage() {
         setError(res.message ?? 'Registration failed')
       }
     } catch (err: unknown) {
-      const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message
-      setError(msg ?? 'Registration failed. Email may already be in use.')
+      const axiosErr = err as { response?: { data?: { message?: string; errors?: Record<string, string> } }; message?: string }
+      if (!axiosErr.response) {
+        setError('Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+      } else {
+        const backendMsg = axiosErr.response.data?.message
+        const fieldErrors = axiosErr.response.data?.errors
+        if (fieldErrors && Object.keys(fieldErrors).length > 0) {
+          setError(Object.values(fieldErrors).join(', '))
+        } else {
+          setError(backendMsg || 'Registration failed')
+        }
+      }
     } finally {
       setLoading(false)
     }

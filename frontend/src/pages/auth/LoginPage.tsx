@@ -27,8 +27,12 @@ export function LoginPage() {
         setError(res.message ?? 'Login failed')
       }
     } catch (err: unknown) {
-      const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message
-      setError(msg ?? 'Invalid email or password. Please try again.')
+      const axiosErr = err as { response?: { data?: { message?: string } }; message?: string }
+      if (!axiosErr.response) {
+        setError('Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+      } else {
+        setError(axiosErr.response.data?.message || 'Invalid email or password. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
