@@ -1,0 +1,3 @@
+com\taskflow\dependency\DependencyServiceTest.class
+com\taskflow\ai\AiServiceTest.class
+com\taskflow\auth\AuthServiceTest.class

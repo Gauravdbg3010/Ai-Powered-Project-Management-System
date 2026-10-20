@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: taskflow-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:h2}
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/taskflow_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  ai:
+    openai:
+      api-key: ${GEMINI_API_KEY:${AI_API_KEY:${OPENAI_API_KEY:demo-key}}}
+      base-url: ${GEMINI_BASE_URL:${AI_BASE_URL:${OPENAI_BASE_URL:https://generativelanguage.googleapis.com/v1beta/openai/}}}
+      chat:
+        options:
+          model: ${GEMINI_MODEL:${AI_MODEL:${OPENAI_MODEL:gemini-1.5-flash}}}
+          temperature: 0.7
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-this-secret-in-production-must-be-at-least-256-bits-long-for-HS256}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+server:
+  port: ${PORT:8080}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.taskflow: DEBUG
+    org.springframework.security: WARN
