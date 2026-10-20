@@ -35,7 +35,7 @@ export function RegisterPage() {
     } catch (err: unknown) {
       const axiosErr = err as { response?: { data?: { message?: string; errors?: Record<string, string> } }; message?: string }
       if (!axiosErr.response) {
-        setError('Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+        setError(axiosErr.message || 'Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
       } else {
         const backendMsg = axiosErr.response.data?.message
         const fieldErrors = axiosErr.response.data?.errors
