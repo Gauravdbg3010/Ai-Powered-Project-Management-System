@@ -29,7 +29,7 @@ public class AuthService {
                 .role(role)
                 .build();
 
-        userRepository.save(user);
+        user = userRepository.save(user);
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name(), user.getId());
         return new AuthResponse(token, user.getEmail(), user.getName(), user.getRole().name(), user.getId());
     }
