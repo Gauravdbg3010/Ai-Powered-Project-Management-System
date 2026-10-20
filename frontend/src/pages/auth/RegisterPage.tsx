@@ -1,4 +1,4 @@
-gitimport { useState, FormEvent } from 'react'
+import { useState, FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Zap, AlertCircle } from 'lucide-react'
 import { authApi } from '../../api/auth'
