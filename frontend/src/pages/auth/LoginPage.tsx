@@ -96,6 +96,12 @@ export function LoginPage() {
             <Button type="submit" loading={loading} className="w-full justify-center py-2">
               Sign In
             </Button>
+
+            {loading && (
+              <p className="text-[11px] text-primary-700 bg-primary-50 border border-primary-200 rounded p-2 text-center animate-pulse">
+                Connecting to backend... If the server is waking from idle sleep (Render free tier), it can take ~30–45s.
+              </p>
+            )}
           </form>
 
           {/* Quick Demo Credentials */}
