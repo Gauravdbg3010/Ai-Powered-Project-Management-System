@@ -27,9 +27,13 @@ export function LoginPage() {
         setError(res.message ?? 'Login failed')
       }
     } catch (err: unknown) {
-      const axiosErr = err as { response?: { data?: { message?: string } }; message?: string }
+      const axiosErr = err as { response?: { data?: { message?: string } }; message?: string; code?: string }
       if (!axiosErr.response) {
-        setError(axiosErr.message || 'Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+        if (axiosErr.message?.includes('timeout') || axiosErr.code === 'ECONNABORTED') {
+          setError('Backend is waking up from idle state (takes ~45s on Render free tier). It is now online—please click Sign In again!')
+        } else {
+          setError(axiosErr.message || 'Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+        }
       } else {
         setError(axiosErr.response.data?.message || 'Invalid email or password. Please try again.')
       }

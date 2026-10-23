@@ -33,9 +33,13 @@ export function RegisterPage() {
         setError(res.message ?? 'Registration failed')
       }
     } catch (err: unknown) {
-      const axiosErr = err as { response?: { data?: { message?: string; errors?: Record<string, string> } }; message?: string }
+      const axiosErr = err as { response?: { data?: { message?: string; errors?: Record<string, string> } }; message?: string; code?: string }
       if (!axiosErr.response) {
-        setError(axiosErr.message || 'Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+        if (axiosErr.message?.includes('timeout') || axiosErr.code === 'ECONNABORTED') {
+          setError('Backend is waking up from idle state (takes ~45s on Render free tier). It is now online—please click Create Account again!')
+        } else {
+          setError(axiosErr.message || 'Cannot connect to backend server. Make sure the backend is deployed/running and reachable.')
+        }
       } else {
         const backendMsg = axiosErr.response.data?.message
         const fieldErrors = axiosErr.response.data?.errors
