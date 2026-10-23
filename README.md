@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TaskFlow — AI-Powered Enterprise Project & Task Management System
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://adoptium.net/)
@@ -264,6 +263,4 @@ mvn test
 
 - **Swagger / OpenAPI Documentation**: Visit `http://localhost:8080/swagger-ui.html` when backend is running.
 - **Postman Collection**: Import [`taskflow-postman-collection.json`](file:///d:/Project%201/taskflow-postman-collection.json) directly into Postman to test all endpoints.
-=======
 # Ai-Powered-Project-Management-System
->>>>>>> 1ccc821fb5157cbb2f98ef6ad3b1022dd01c87ec
