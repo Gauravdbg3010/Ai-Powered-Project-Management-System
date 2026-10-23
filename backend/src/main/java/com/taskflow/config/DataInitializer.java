@@ -44,16 +44,32 @@ public class DataInitializer implements CommandLineRunner {
 
         log.info("Seeding initial production-like demo data...");
 
-        // 1. Create Users
+        // 1. Create Users with realistic engineering team identities
         User manager = userRepository.save(User.builder()
-                .name("Alex Johnson (Manager)")
+                .name("Sarah Chen")
+                .email("sarah.chen@taskflow.dev")
+                .passwordHash(passwordEncoder.encode("Password123!"))
+                .role(User.Role.MANAGER)
+                .build());
+
+        // Legacy compatibility alias so manager@taskflow.com works seamlessly
+        userRepository.save(User.builder()
+                .name("Sarah Chen")
                 .email("manager@taskflow.com")
                 .passwordHash(passwordEncoder.encode("Password123!"))
                 .role(User.Role.MANAGER)
                 .build());
 
         User emp1 = userRepository.save(User.builder()
-                .name("Sarah Connor")
+                .name("Marcus Vance")
+                .email("marcus.vance@taskflow.dev")
+                .passwordHash(passwordEncoder.encode("Password123!"))
+                .role(User.Role.EMPLOYEE)
+                .build());
+
+        // Legacy compatibility alias so alex@taskflow.com works seamlessly
+        userRepository.save(User.builder()
+                .name("Marcus Vance")
                 .email("alex@taskflow.com")
                 .passwordHash(passwordEncoder.encode("Password123!"))
                 .role(User.Role.EMPLOYEE)
@@ -61,14 +77,14 @@ public class DataInitializer implements CommandLineRunner {
 
         User emp2 = userRepository.save(User.builder()
                 .name("David Miller")
-                .email("david@taskflow.com")
+                .email("david.miller@taskflow.dev")
                 .passwordHash(passwordEncoder.encode("Password123!"))
                 .role(User.Role.EMPLOYEE)
                 .build());
 
         User emp3 = userRepository.save(User.builder()
                 .name("Elena Rostova")
-                .email("elena@taskflow.com")
+                .email("elena.rostova@taskflow.dev")
                 .passwordHash(passwordEncoder.encode("Password123!"))
                 .role(User.Role.EMPLOYEE)
                 .build());

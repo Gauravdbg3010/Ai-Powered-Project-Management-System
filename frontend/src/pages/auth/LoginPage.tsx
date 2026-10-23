@@ -40,10 +40,10 @@ export function LoginPage() {
 
   const fillDemo = (role: 'manager' | 'employee') => {
     if (role === 'manager') {
-      setEmail('manager@taskflow.com')
+      setEmail('sarah.chen@taskflow.dev')
       setPassword('Password123!')
     } else {
-      setEmail('alex@taskflow.com')
+      setEmail('marcus.vance@taskflow.dev')
       setPassword('Password123!')
     }
   }
@@ -103,16 +103,16 @@ export function LoginPage() {
                 onClick={() => fillDemo('manager')}
                 className="px-2.5 py-1.5 text-xs text-left bg-surface-subtle hover:bg-primary-50 hover:text-primary-700 border border-border rounded transition-colors"
               >
-                <span className="font-semibold block">Manager</span>
-                <span className="text-[11px] text-gray-500 block">manager@taskflow.com</span>
+                <span className="font-semibold block">Engineering Lead</span>
+                <span className="text-[11px] text-gray-500 block">sarah.chen@taskflow.dev</span>
               </button>
               <button
                 type="button"
                 onClick={() => fillDemo('employee')}
                 className="px-2.5 py-1.5 text-xs text-left bg-surface-subtle hover:bg-primary-50 hover:text-primary-700 border border-border rounded transition-colors"
               >
-                <span className="font-semibold block">Employee</span>
-                <span className="text-[11px] text-gray-500 block">alex@taskflow.com</span>
+                <span className="font-semibold block">Product Engineer</span>
+                <span className="text-[11px] text-gray-500 block">marcus.vance@taskflow.dev</span>
               </button>
             </div>
           </div>
